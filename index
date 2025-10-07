@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tandem Icebreaker</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --fg: #0f172a;
+      --muted: #6b7280;
+      --card: #f8fafc;
+      --accent: #f59e0b;
+      --shadow: 0 10px 25px rgba(2, 6, 23, 0.08);
+      --radius: 18px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0b1220;
+        --fg: #e5e7eb;
+        --muted: #94a3b8;
+        --card: #0f172a;
+        --shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
+      }
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial;
+      display: grid;
+      place-items: center;
+      height: 100vh;
+    }
+    .card {
+      width: min(720px, 95vw);
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px;
+      position: relative;
+    }
+    .title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      margin: 0 0 8px 0;
+      font-size: 16px;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+    .sparkle { width: 22px; height: 22px; object-fit: cover; border-radius: 50%; display: inline-block; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.15)); }
+    blockquote {
+      margin: 8px 0 2px 0;
+      font-size: clamp(18px, 3.2vw, 22px);
+      line-height: 1.35;
+      font-weight: 600;
+    }
+    .toolbar { position: absolute; top: 10px; right: 10px; display: flex; gap: 6px; }
+    .btn { border: 1px solid rgba(0,0,0,0.1); background: var(--card); color: var(--fg); padding: 6px 8px; border-radius: 10px; font-size: 12px; cursor: pointer; }
+    .btn:hover { filter: brightness(1.06); }
+    .btn:active { transform: translateY(1px); }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script>
+    const title = 'Tandem Icebreaker';
+
+    const QUESTIONS = [
+      "Do you love working from home or would you rather be in the office? Is there a balance of both that you like best?",
+      "What’s the last great TV show or movie you watched?",
+      "Best book you’ve ever read?",
+      "If you could learn one new professional skill, what would it be?",
+      "You have your own late night talk show, who do you invite as your first guest?",
+      "If you had to eat one meal everyday for the rest of your life what would it be?",
+      "What is your favorite item you’ve bought this year?",
+      "Say you’re independently wealthy and don’t have to work, what would you do with your time?",
+      "What fictional family would you be a member of?",
+      "What’s your favorite TV series?",
+      "What was the worst job you ever had?",
+      "What would your superpower be and why?",
+      "As a child, what did you want to be when you grew up?",
+      "What fictional world or place would you like to visit?",
+      "What is your favorite time of the day and why?",
+      "What book, movie read/seen recently you would recommend and why?",
+      "If you had a time machine, would go back in time or into the future?",
+      "Are you a traveler or a homebody?",
+      "What’s your favorite place of all the places you’ve travelled?",
+      "What is your favorite meal to cook and why?",
+      "You can have an unlimited supply of one thing for the rest of your life, what is it?",
+      "If you could live anywhere in the world for a year, where would it be?",
+      "If you could see one movie again for the first time, what would it be and why?",
+      "If you could choose any two famous people to have dinner with who would they be?",
+      "If you could do anything in the world as your career, what would you do?",
+      "If you could be guaranteed one thing in life (besides money), what would it be?",
+      "What song or album could you listen to on repeat?",
+      "If you could live in one fictional universe, which one would you choose?",
+      "What is the best present you ever got?",
+      "If you could switch lives with anyone for a day, who would it be?"
+    ];
+
+    let idx = 0;
+
+    function render() {
+      const root = document.getElementById('root');
+      const q = QUESTIONS[idx];
+      root.innerHTML = `
+        <div class="card">
+          <div class="toolbar">
+            <button class="btn" id="next">Next</button>
+          </div>
+          <h2 class="title"><img class="sparkle" src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExY2VueHVidWxkM2FtZGlrMXR3YnVxMGt2ejVmc202YzZ0ZGM4dm4ybCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/hqDeZrQogBnxWaJC5v/giphy.gif" alt="" loading="lazy" referrerpolicy="no-referrer" /> ${title}</h2>
+          <blockquote>“${q}”</blockquote>
+        </div>`;
+
+      document.getElementById('next').onclick = () => {
+        idx = (idx + 1) % QUESTIONS.length;
+        render();
+      };
+    }
+
+    render();
+  </script>
+</body>
+</html>
