@@ -109,6 +109,7 @@
       root.innerHTML = `
         <div class="card">
           <div class="toolbar">
+            <button class="btn" id="prev">Prev</button>
             <button class="btn" id="next">Next</button>
           </div>
           <h2 class="title"><img class="sparkle" src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExY2VueHVidWxkM2FtZGlrMXR3YnVxMGt2ejVmc202YzZ0ZGM4dm4ybCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/hqDeZrQogBnxWaJC5v/giphy.gif" alt="" loading="lazy" referrerpolicy="no-referrer" /> ${title}</h2>
@@ -117,6 +118,11 @@
 
       document.getElementById('next').onclick = () => {
         idx = (idx + 1) % QUESTIONS.length;
+        render();
+      };
+
+      document.getElementById('prev').onclick = () => {
+        idx = (idx - 1 + QUESTIONS.length) % QUESTIONS.length;
         render();
       };
     }
